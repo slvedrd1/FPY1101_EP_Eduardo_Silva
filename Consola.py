@@ -15,7 +15,7 @@ def opcion_menu():
         try:
             opcion = int(input("Ingrese una opcion del menu: "))
             return opcion
-        except:
+        except ValueError:
             print("ERROR: Debe ingresar una opcion valida (1-5)")
 
 def validar_sigla(consolas, ventas, sigla):
@@ -151,6 +151,25 @@ def buscar_consola(consola, ventas, sigla):
     
     return None
 
+def mostrar_consola(consola, ventas):
+
+    if (len(consola) == 0) or (len(ventas) == 0):
+        print("--- NO SE ENCUENTRAS CONSOLAS REGISTRADAS ---")
+        return
+    
+    contadorConsolas = 0
+    stockAcumulado = 0
+
+    for sigla in consola:
+
+        datosConsola = consola[sigla]
+        datosVentas = ventas[sigla]
+        contadorConsolas += 1
+        stockAcumulado += datosVentas[1]
+
+        print(f"Sigla: {sigla} / Nombre: {datosConsola[0]} / Fabricante: {datosConsola[1]} / Año: {datosConsola[2]} / Precio: {datosVentas[0]} / Stock: {datosVentas[1]}")
+    print("==============================")
+    print(f"Total consolas: {contadorConsolas}")
 
 
 consolas = {}
@@ -201,7 +220,17 @@ while True:
                 print("--- CONSOLA NO ENCONTRADA PARA ELIMINAR ---")
 
         case 4:
-            
+            print("==============================")
+            print("LISTADO COMPLETO DE CONSOLAS")
+            print("==============================")
+            mostrar_consola(consolas, ventas)
+
+        case 5:
+            print("-- Saliendo... ---")
+            break
+        case _:
+            print("ERROR: Debe ingresar una opcion valida (1-5)")
+
 
 
 
